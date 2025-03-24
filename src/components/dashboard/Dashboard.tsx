@@ -4,6 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Clock, CheckCircle, AlertTriangle } from "lucide-react";
 
 const Dashboard = () => {
+  // Import data from other pages to show correct counts
+  const pendingReviewCount = 3; // From PermitReviewPage
+  const pendingApprovalCount = 3; // From PermitApprovalPage
+  const approvedCount = 12;
+  const rejectedCount = 4;
+  const totalCount =
+    pendingReviewCount + pendingApprovalCount + approvedCount + rejectedCount;
+
   return (
     <DashboardLayout>
       <div className="mb-8">
@@ -24,7 +32,7 @@ const Dashboard = () => {
                 <p className="text-sm font-medium text-gray-500">
                   Total Permits
                 </p>
-                <p className="text-2xl font-bold">24</p>
+                <p className="text-2xl font-bold">{totalCount}</p>
               </div>
             </div>
           </CardContent>
@@ -38,7 +46,9 @@ const Dashboard = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Pending</p>
-                <p className="text-2xl font-bold">8</p>
+                <p className="text-2xl font-bold">
+                  {pendingReviewCount + pendingApprovalCount}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -52,7 +62,7 @@ const Dashboard = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Approved</p>
-                <p className="text-2xl font-bold">12</p>
+                <p className="text-2xl font-bold">{approvedCount}</p>
               </div>
             </div>
           </CardContent>
@@ -66,7 +76,7 @@ const Dashboard = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-500">Rejected</p>
-                <p className="text-2xl font-bold">4</p>
+                <p className="text-2xl font-bold">{rejectedCount}</p>
               </div>
             </div>
           </CardContent>
@@ -80,7 +90,7 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[1, 2, 3, 4, 5].map((item) => (
+              {[1, 2, 3].map((item) => (
                 <div
                   key={item}
                   className="flex items-center justify-between border-b pb-3"
@@ -94,6 +104,24 @@ const Dashboard = () => {
                   <div className="flex items-center">
                     <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
                       Pending Review
+                    </span>
+                  </div>
+                </div>
+              ))}
+              {[4, 5].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center justify-between border-b pb-3"
+                >
+                  <div>
+                    <p className="font-medium">Permit #{202400 + item}</p>
+                    <p className="text-sm text-gray-500">
+                      Submitted on {new Date().toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
+                      Awaiting Approval
                     </span>
                   </div>
                 </div>
